@@ -1,18 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Pesquisar Produtos</h1>
+<h1 class="mb-4">Pesquisar Produtos</h1>
 
-<form method="get">
-    {{ filter.form.as_p }}
-    <button type="submit">Filtrar</button>
-</form>
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form method="get" class="p-2">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label fw-bold">Nome do Produto</label>
+                    {{ filter.form.nome }}
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Faixa de Preço</label>
+                    <div class="input-group">
+                        {{ filter.form.preco }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label fw-bold">Disponibilidade</label>
+                    {{ filter.form.disponivel }}
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<ul>
+<h2 class="mb-3">Resultados</h2>
+<div class="row">
     {% for produto in filter.qs %}
+    <div class="col-md-4">
         {% include 'partials/_card_produto.html' %}
+    </div>
     {% empty %}
-        <li>Nenhum produto encontrado.</li>
+    <div class="col">
+        <div class="alert alert-info">
+            Nenhum produto encontrado com os filtros aplicados.
+        </div>
+    </div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}
