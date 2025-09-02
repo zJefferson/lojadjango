@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4 text-center">Produtos</h1>
+
+<div class="row">
+    {% for produto in produtos %}
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ produto.nome }}</h5>
+                <p class="card-text">Preço: <strong>R$ {{ produto.preco }}</strong></p>
+                <span class="badge {% if produto.disponivel %} bg-success {% else %} bg-danger {% endif %}">
+                    {% if produto.disponivel %} Disponível {% else %} Indisponível {% endif %}
+                </span>
+                <a href="{% url 'produto_detail' produto.pk %}" class="btn btn-primary btn-sm mt-3">Ver Detalhes</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

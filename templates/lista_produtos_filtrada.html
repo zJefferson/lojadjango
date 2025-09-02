@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Pesquisar Produtos</h1>
+
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Filtrar</button>
+</form>
+
+<ul>
+    {% for produto in filter.qs %}
+        {% include 'partials/_card_produto.html' %}
+    {% empty %}
+        <li>Nenhum produto encontrado.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
